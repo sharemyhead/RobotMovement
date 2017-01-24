@@ -78,3 +78,7 @@ Example Input and Output:
     REPORT
     
     Output: 3,3,NORTH
+    
+The main class is `RobotMovementApp` inside `src/main/java/com/sharemyhead/main` which reads the `test-data.txt` file inside `src/main/resources`.
+
+

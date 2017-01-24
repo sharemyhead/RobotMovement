@@ -110,4 +110,29 @@ class InstructionProcessorImplTest extends Specification {
             toyRobot.getyPosition() == 4
             toyRobot.getDirection() == Direction.NORTH
     }
+
+    def "ProcessInstructions with incorrect PLACE, followed by instructions and correct PLACE followed by instructions"() {
+        setup:
+        Board board = new Board(5, 5)
+        ToyRobot toyRobot = new ToyRobot(board)
+        List<Instruction> instructions = new ArrayList<>()
+        instructions.add(new Place(5, 5, Direction.EAST))
+        instructions.add(new Move())
+        instructions.add(new Move())
+        instructions.add(new Left())
+        instructions.add(new Move())
+        instructions.add(new Report())
+        instructions.add(new Place(0, 0, Direction.EAST))
+        instructions.add(new Move())
+        instructions.add(new Move())
+        instructions.add(new Left())
+        instructions.add(new Move())
+        instructions.add(new Report())
+        when:
+        instructionProcessor.processInstructions(instructions, toyRobot)
+        then:
+        toyRobot.getxPosition() == 2
+        toyRobot.getyPosition() == 1
+        toyRobot.getDirection() == Direction.NORTH
+    }
 }
